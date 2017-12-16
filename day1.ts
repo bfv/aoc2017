@@ -4,9 +4,11 @@ let captcha = '23736999148234612466339528635467298545732686574853341217977818839
 let prev = -1;
 let result1 = 0;
 captcha = captcha + captcha.substring(0, 1);
+let captchaArray = new Array<number>();
 
 for (let i = 0; i < captcha.length; i++) {
     let curr = parseInt(captcha.substring(i, i + 1));
+    captchaArray.push(curr);
     if (curr == prev) {
         result1 += curr;
     }
@@ -14,3 +16,19 @@ for (let i = 0; i < captcha.length; i++) {
 }
 
 console.log('result1:', result1);  // 995
+
+result1 = 0;
+let half = (captchaArray.length - 1) / 2;
+for (let i = 0; i < captchaArray.length - 1; i++) {
+
+    let halfway = (i + half);
+    if (halfway >= captchaArray.length) {
+        halfway -= captchaArray.length - 1;
+    }
+
+    if (captchaArray[i] == captchaArray[halfway]) {
+        result1 += captchaArray[i];
+    }
+}
+
+console.log('result1.1:', result1);
