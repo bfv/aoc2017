@@ -15,14 +15,18 @@ let data = `1136	1129	184	452	788	1215	355	1109	224	1358	1278	176	1302	186	128	1
 1165	1251	702	282	1178	834	211	1298	382	1339	67	914	1273	76	81	71
 6151	5857	4865	437	6210	237	37	410	544	214	233	6532	2114	207	5643	6852`;
 
+
 let data1 = data.split('\n');
 let result2 = 0;
-
+let result2b = 0;
 for (let i = 0; i < data1.length; i++) {
-   result2 += checksum(data1[i].split('\t'));
+   let array = data1[i].split('\t');
+   result2 += checksum(array);
+   result2b += checkDividers(array);
 }
 
-console.log('result2', result2);
+console.log('result2:', result2);
+console.log('result2b:', result2b);
 
 function checksum(line: string[]): number {
 
@@ -34,4 +38,23 @@ function checksum(line: string[]): number {
         max = Math.max(max, curr);
     }
     return (max - min);
+}
+
+function checkDividers(line: string[]): number {
+    let result = 0;
+    let array = new Array<number>();
+
+    for (let x in line) {
+        array.push(parseInt(line[x]));
+    }
+
+    for (let i = 0; i < array.length; i++) {
+        for (let j = 0; j < array.length; j++) {
+            if (i != j && array[i] % array[j] == 0) {
+                result += array[i] / array[j];
+            }
+        }
+    }
+
+    return result;
 }
