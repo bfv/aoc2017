@@ -528,12 +528,12 @@ function day4(data: string) {
     console.log('day4b:', resultb);
 }
 
-function parseLine(line: string, f: fEquals): number {
+function parseLine(line: string, isEqual: fEquals): number {
 
     let array = line.split(' ');
     for (let i = 0; i < array.length; i++) {
         for (let j = i + 1; j < array.length; j++) {
-            if (f(array[i], array[j])) {
+            if (isEqual(array[i], array[j])) {
                 return 0;
             }
         }
@@ -546,6 +546,5 @@ function equal4(str1: string, str2: string): boolean {
 }
 
 function equal4b(str1: string, str2: string): boolean {
-
     return str1.split('').sort().toString() == str2.split('').sort().toString();
 }
